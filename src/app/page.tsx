@@ -1,91 +1,46 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
+'use client'
 
-const inter = Inter({ subsets: ['latin'] })
+import { Video } from '@/@types'
+import { Carousel } from '@/components/Carousel'
+import { useVideo } from '@/contexts/video'
 
-export default function Home() {
+export default function PageHome() {
+  const { videos } = useVideo()
+
+  console.log(videos)
+
+  // Define a lista de categorias na ordem desejada
+  const categoryOrder = ['HTML', 'CSS', 'Javascript', 'Typescript', 'React.js', 'Next.js', 'React Native', 'Node.js']
+
+  // Ordena os vídeos por categoria na ordem definida
+  const sortedVideos = videos.sort((a: { category: string }, b: { category: string }) => {
+    const aCategoryIndex = categoryOrder.indexOf(a.category)
+    const bCategoryIndex = categoryOrder.indexOf(b.category)
+    return aCategoryIndex - bCategoryIndex
+  })
+
+  // Agrupar vídeos por categoria
+  const videosByCategory = sortedVideos.reduce((acc: { [x: string]: any[] }, video: Video) => {
+    const category = video.category || 'Outros'
+    const durationMinutes = Math.floor(video.duration)
+    if (durationMinutes > 1) {
+      // adiciona a verificação de duração
+      if (!acc[category]) {
+        acc[category] = []
+      }
+      acc[category].push(video)
+    }
+    return acc
+  }, {} as Record<string, Video[]>)
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <div className="flex h-full">
+      <div className="flex flex-1 flex-col">
+        {Object.keys(videosByCategory).map((category) => (
+          <Carousel key={category} data={videosByCategory[category]} title={category} />
+        ))}
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      <div className="w-64 h-full rounded-xl bg-[#070913]"></div>
+    </div>
   )
 }
