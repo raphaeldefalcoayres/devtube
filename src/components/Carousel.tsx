@@ -30,11 +30,11 @@ const Carousel = ({ data, title }: CarouselProps) => {
       <div className="w-full flex items-center justify-between">
         <h2 className="mb-4 font-semibold text-xl">{title}</h2>
         <div>
-          <button disabled={!hasPreviousPage} onClick={handlePreviousPage}>
-            <FaChevronLeft />
+          <button className="disabled:opacity-50" disabled={!hasPreviousPage} onClick={handlePreviousPage}>
+            <FaChevronLeft className="w-6 h-6" />
           </button>
-          <button disabled={!hasNextPage} onClick={handleNextPage}>
-            <FaChevronRight />
+          <button className="disabled:opacity-50" disabled={!hasNextPage} onClick={handleNextPage}>
+            <FaChevronRight className="w-6 h-6" />
           </button>
         </div>
       </div>

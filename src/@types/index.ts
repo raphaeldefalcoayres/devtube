@@ -34,3 +34,17 @@ export interface CarouselProps {
   data: Video[]
   title: string
 }
+
+export type UserVideo = {
+  videoId: string
+  category: string
+  duration: number
+  vote: string
+}
+
+export type User = {
+  name?: string
+  email?: string
+  thumb?: string
+  videos: UserVideo[]
+}

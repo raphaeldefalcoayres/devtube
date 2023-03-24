@@ -1,4 +1,5 @@
 import { Header } from '@/components/Header'
+import { UserProvider } from '@/contexts/user'
 import VideoProvider from '@/contexts/video'
 import '@/styles/global.css'
 
@@ -15,10 +16,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR" className={inter.className}>
       <body>
-        <VideoProvider>
-          <Header />
-          <main className="p-6">{children}</main>
-        </VideoProvider>
+        <UserProvider>
+          <VideoProvider>
+            <Header />
+            <main className="pt-24 px-6 pb-6">{children}</main>
+          </VideoProvider>
+        </UserProvider>
       </body>
     </html>
   )
