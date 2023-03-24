@@ -177,7 +177,7 @@ export default function PageHome() {
             </>
           )}
 
-          {!user.videos && (
+          {!user?.videos && (
             <div className="flex flex-col items-center justify-center my-auto">
               <h3 className="text-lg text-center">Faça login pra acompanhar sua evolução 🚀</h3>
               <button className="bg-blue-500 rounded-xl px-4 py-1 text-white mt-3" onClick={() => setShowModal(true)}>

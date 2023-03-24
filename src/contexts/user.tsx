@@ -17,9 +17,9 @@ type UserProviderProps = {
 }
 
 function UserProvider({ children }: UserProviderProps) {
-  const userStorage = localStorage.getItem('user')
+  const userStorage = typeof window !== 'undefined' ? localStorage.user : undefined
   const userStorageJSON = userStorage ? JSON.parse(userStorage) : null
-  const [user, setUser] = useState<User>(userStorageJSON || {})
+  const [user, setUser] = useState<User>(userStorageJSON)
 
   useEffect(() => {
     console.log(user)

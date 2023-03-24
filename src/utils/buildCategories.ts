@@ -2,12 +2,14 @@ import { Category, Video } from '@/@types'
 
 let ITEMS_PER_PAGE: number
 
-if (window.innerWidth > 1920) {
-  ITEMS_PER_PAGE = 6 // 2 XL size
-} else if (window.innerWidth === 1920) {
-  ITEMS_PER_PAGE = 4 // XL size
-} else {
-  ITEMS_PER_PAGE = 3 // MD size (default)
+if (typeof window !== 'undefined') {
+  if (window.innerWidth > 1920) {
+    ITEMS_PER_PAGE = 6 // 2 XL size
+  } else if (window.innerWidth === 1920) {
+    ITEMS_PER_PAGE = 4 // XL size
+  } else {
+    ITEMS_PER_PAGE = 3 // MD size (default)
+  }
 }
 
 export const buildCategories = (videos: Video[]): Category[] => {

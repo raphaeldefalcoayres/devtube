@@ -49,7 +49,7 @@ const Header = () => {
 
   function handleLogout() {
     localStorage.removeItem('user')
-    setUser(null)
+    setUser({ videos: [] })
   }
 
   return (
@@ -84,7 +84,7 @@ const Header = () => {
           </button>
         </div>
         <div className="flex gap-3">
-          {user.name && (
+          {user?.name && (
             <>
               <div className="relative rounded-full w-10 h-10 overflow-hidden">
                 <Image fill src={user.thumb!} alt="foto de perfil no header" />
