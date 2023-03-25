@@ -105,7 +105,9 @@ const ThumbVideo = ({ video, className = '' }: ThumbVideoProps) => {
   const isWatch = user?.videos?.some((userVideo) => userVideo.videoId === video.videoId)
 
   return (
-    <div className={`flex flex-col w-[calc(33%-15px)] 3xl:w-[calc(25%-15px)] 4xl:w-[calc(16.7%-15px)]  ${className}`}>
+    <div
+      className={`flex flex-col w-[calc(100%-15px)] md:w-[calc(33%-15px)] 3xl:w-[calc(25%-15px)] 4xl:w-[calc(16.7%-15px)]  ${className}`}
+    >
       <Link href={`/${video.videoId}`} className="w-full h-52 overflow-hidden rounded-xl relative">
         <Image fill={true} className="object-cover" src={video.thumbnail} alt="thumb" />
         <div className="absolute z-10 right-2 bottom-2 bg-black/70 rounded-lg text-xs p-1">

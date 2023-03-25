@@ -114,12 +114,12 @@ export default function PageHome() {
         </MyModal>
       )}
       <div className="flex h-full">
-        <div className="flex w-[calc(100%-256px)] flex-col">
+        <div className="flex w-full md:w-[calc(100%-256px)] flex-col">
           {Object.keys(videosByCategory).map((category) => (
             <Carousel key={category} data={videosByCategory[category]} title={category} />
           ))}
         </div>
-        <div className="fixed right-0 w-64 h-[calc(100vh-100px)] flex flex-col items-center justify-start p-6 rounded-xl bg-[#070913]">
+        <div className="hidden fixed right-0 w-64 h-[calc(100vh-100px)] md:flex flex-col items-center justify-start p-6 rounded-xl bg-[#070913]">
           {user?.videos && (
             <>
               <div className="relative w-16 h-16 rounded-full overflow-hidden">

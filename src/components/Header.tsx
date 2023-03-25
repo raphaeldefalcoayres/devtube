@@ -60,27 +60,27 @@ const Header = () => {
       </div>
       <div className="w-full flex items-center justify-between py-3 px-6 bg-[#070913]">
         <Link href={'/'} className="flex gap-2 items-center">
-          <FaYoutube className="w-10 h-10 text-[#394894]" /> <strong className="text-xl">DEVTUBE</strong>
+          <FaYoutube className="w-10 h-10 text-[#394894]" /> <strong className="text-xl md:flex hidden">DEVTUBE</strong>
         </Link>
-        <div className="flex relative w-[30%] items-center gap-2">
-          <div className="flex items-center gap-1 w-32 bg-blue-900 h-fit rounded-xl px-4 py-1">
+        <div className="flex relative md:w-[30%] items-center gap-2">
+          <div className="flex items-center gap-1 md:w-32 bg-blue-900 h-fit rounded-xl px-2 md:px-4 py-1 text-xs md:text-base">
             {videos.length}
             <small> videos</small>
           </div>
           <input
             type="text"
             value={searchInput}
-            className="w-full bg-[#020305] px-4 py-2 pr-4 rounded-xl"
+            className="w-full bg-[#020305] px-4 py-1 md:py-2 pr-4 rounded-xl"
             placeholder="Busque aqui..."
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={handleFilterKeyDown}
           />
           <button
             title="clique para buscar"
-            className="absolute right-0 top-0 bg-blue-900 hover:bg-blue-800 px-4 h-full rounded-t-xl rounded-b-xl"
+            className="absolute right-0 top-0 bg-blue-900 hover:bg-blue-800 px-2 md:px-4 h-full rounded-t-xl rounded-b-xl"
             onClick={handleFilter}
           >
-            <FaSearch className="w-5 h-5" />
+            <FaSearch className="w-4 h-4 md:w-5 md:h-5" />
           </button>
         </div>
         <div className="flex gap-3">

@@ -7,8 +7,10 @@ if (typeof window !== 'undefined') {
     ITEMS_PER_PAGE = 6 // 2 XL size
   } else if (window.innerWidth === 1920) {
     ITEMS_PER_PAGE = 4 // XL size
+  } else if (window.innerWidth === 1024) {
+    ITEMS_PER_PAGE = 3 // MD size
   } else {
-    ITEMS_PER_PAGE = 3 // MD size (default)
+    ITEMS_PER_PAGE = 1 // XS size (default)
   }
 }
 
