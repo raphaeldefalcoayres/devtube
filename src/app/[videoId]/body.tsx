@@ -19,8 +19,8 @@ const Body = ({ video, relatedVideos }: { video: Video; relatedVideos: Video[] }
   const isWatch = user?.videos?.some((userVideo) => userVideo.videoId === video.videoId)
 
   return (
-    <div className="flex">
-      <div className="w-[70vw]">
+    <div className="flex md:flex-row flex-col">
+      <div className="w-full md:w-[70vw]">
         <div className="w-full h-[39.5vw] rounded-xl overflow-hidden">
           {isWatch && <div className="absolute z-10 left-2 top-2 bg-black/70 rounded-lg text-xs p-1">JÁ ASSISTI</div>}
           <ReactPlayer width={'100%'} height={'100%'} url={`https://www.youtube.com/watch?v=${video.videoId}`} />
@@ -63,7 +63,7 @@ const Body = ({ video, relatedVideos }: { video: Video; relatedVideos: Video[] }
           </button>
         </div>
       </div>
-      <div className="flex flex-1 flex-col pl-4">
+      <div className="flex flex-1 flex-col md:pl-4">
         {relatedVideos.map((relatedVideo: Video) => (
           <ThumbVideo className="w-full" key={relatedVideo.videoId} video={relatedVideo} />
         ))}
