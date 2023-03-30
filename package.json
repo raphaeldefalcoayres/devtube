@@ -1,7 +1,13 @@
 {
-  "name": "web",
+  "name": "dev-tube",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=14.0.0",
+    "yarn": "please-use-pnpm",
+    "npm": "please-use-pnpm",
+    "pnpm": ">=7.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
