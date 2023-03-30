@@ -16,20 +16,16 @@ const Header = () => {
   const [searchInput, setSearchInput] = useState(searchQuery || '')
   const router = useRouter()
   const pathname = usePathname()
-  const { searchVideos, videos } = useVideo()
+  const { videos } = useVideo()
   const { user, setUser } = useUser()
-
-  console.log('user', user)
 
   useEffect(() => {
     router.push(pathname + '?search=' + search)
-    searchVideos(search)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search])
 
   useEffect(() => {
     if (searchQuery) {
-      searchVideos(searchQuery)
       setSearch(searchQuery)
       setSearchInput(searchQuery)
     }
@@ -64,9 +60,10 @@ const Header = () => {
         </Link>
         <div className="flex relative md:w-[30%] items-center gap-2">
           <div className="flex items-center gap-1 md:w-32 bg-blue-900 h-fit rounded-xl px-2 md:px-4 py-1 text-xs md:text-base">
-            {videos.length}
-            <small> videos</small>
+            <span dangerouslySetInnerHTML={{ __html: videos.total.toString() }}></span>
+            <small>videos</small>
           </div>
+    
           <input
             type="text"
             value={searchInput}

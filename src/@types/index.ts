@@ -3,6 +3,15 @@ export interface Category {
   videos: Video[]
 }
 
+export interface VideoList {
+  total: number;
+  limit: number;
+  skip: number;
+  currentPage: number;
+  totalPages: number;
+  data: Video[];
+}
+
 export interface Video {
   channelTitle: string
   channelLogo: string
@@ -15,12 +24,10 @@ export interface Video {
   viewCount: number
   likeCount: number
   dislikeCount: any
-  votes: {
-    positiveVotes: number
-    negativeVotes: number
-    relevance: number
-  }
-  tags: string[]
+  positiveVotes: number
+  negativeVotes: number
+  relevance: number
+  tags: string
   topics: Topics
   category: string
 }

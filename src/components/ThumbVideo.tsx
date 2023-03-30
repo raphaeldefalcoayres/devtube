@@ -13,7 +13,7 @@ interface ThumbVideoProps {
 }
 
 const ThumbVideo = ({ video, className = '' }: ThumbVideoProps) => {
-  const { updateVotes, searchVideos } = useVideo()
+  const { updateVotes } = useVideo()
   const { addVideo, user } = useUser()
   const tagsDefine = [
     'html',
@@ -94,7 +94,7 @@ const ThumbVideo = ({ video, className = '' }: ThumbVideoProps) => {
 
   let tagsSelected: string[] = []
 
-  video.tags.forEach((tag) => {
+  video.tags.split(', ').forEach((tag) => {
     if (tagsDefine.includes(tag.toLowerCase())) {
       tagsSelected.push(tag.toUpperCase())
     }
@@ -119,7 +119,6 @@ const ThumbVideo = ({ video, className = '' }: ThumbVideoProps) => {
             return (
               <Link
                 href={`/?search=${tag}`}
-                onClick={() => searchVideos(tag)}
                 key={tag}
                 className="bg-[#020305]/70 rounded-xl py-1 px-2 text-xs"
               >
@@ -147,7 +146,7 @@ const ThumbVideo = ({ video, className = '' }: ThumbVideoProps) => {
         <div className="flex flex-col items-center justify-start">
           <button
             onClick={() => {
-              updateVotes(video.videoId, video.votes.positiveVotes + 1, video.votes.negativeVotes)
+              updateVotes(video.videoId, video.positiveVotes + 1, video.negativeVotes)
               addVideo(video, 'positive')
             }}
             className="text-[#2D3668] hover:text-[#4f5a99]"
@@ -156,11 +155,11 @@ const ThumbVideo = ({ video, className = '' }: ThumbVideoProps) => {
             <FaChevronUp className="w-6 h-6" />
           </button>
           <strong className="font-semibold text-sm" title="Relevancia">
-            {video.votes.relevance}
+            {video.relevance}
           </strong>
           <button
             onClick={() => {
-              updateVotes(video.videoId, video.votes.positiveVotes, video.votes.negativeVotes + 1)
+              updateVotes(video.videoId, video.positiveVotes, video.negativeVotes + 1)
               addVideo(video, 'negative')
             }}
             className="text-[#682D2D] hover:text-[#aa5959]"

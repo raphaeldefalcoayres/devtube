@@ -12,7 +12,6 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import ReactPlayer from 'react-player'
 
 const Body = ({ video, relatedVideos }: { video: Video; relatedVideos: Video[] }) => {
-  console.log(video)
   const [showMore, setShowMore] = useState(false)
   const { updateVotes } = useVideo()
   const { user } = useUser()
@@ -41,16 +40,16 @@ const Body = ({ video, relatedVideos }: { video: Video; relatedVideos: Video[] }
             </div>
             <div className="flex flex-col items-center justify-start -mt-3">
               <button
-                onClick={() => updateVotes(video.videoId, video.votes.positiveVotes + 1, video.votes.negativeVotes)}
+                onClick={() => updateVotes(video.videoId, video.positiveVotes + 1, video.negativeVotes)}
                 className="text-[#2D3668] hover:text-[#4f5a99]"
               >
                 <FaChevronUp className="w-6 h-6" />
               </button>
               <strong className="font-semibold text-sm" title="Relevancia">
-                {video.votes.relevance}
+                {video.relevance}
               </strong>
               <button
-                onClick={() => updateVotes(video.videoId, video.votes.positiveVotes, video.votes.negativeVotes + 1)}
+                onClick={() => updateVotes(video.videoId, video.positiveVotes, video.negativeVotes + 1)}
                 className="text-[#682D2D] hover:text-[#aa5959]"
               >
                 <FaChevronDown className="w-6 h-6" />
@@ -64,7 +63,7 @@ const Body = ({ video, relatedVideos }: { video: Video; relatedVideos: Video[] }
         </div>
       </div>
       <div className="flex flex-1 flex-col md:pl-4">
-        {relatedVideos.map((relatedVideo: Video) => (
+        {relatedVideos && relatedVideos.map((relatedVideo: Video) => (
           <ThumbVideo className="w-full" key={relatedVideo.videoId} video={relatedVideo} />
         ))}
       </div>

@@ -21,10 +21,6 @@ function UserProvider({ children }: UserProviderProps) {
   const userStorageJSON = userStorage ? JSON.parse(userStorage) : null
   const [user, setUser] = useState<User>(userStorageJSON)
 
-  useEffect(() => {
-    console.log(user)
-  }, [user])
-
   function addVideo(video: Video, vote: 'positive' | 'negative') {
     setUser((prevUser: User) => {
       const videoIndex = prevUser.videos.findIndex((prevVideo) => prevVideo.videoId === video.videoId)
