@@ -1,38 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# DevTube
 
-## Getting Started
+## _Important information for application, you must follow each step by step._
 
-First, run the development server:
+Ensure that all extensions are successfully installed, such as:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
+- Eslint
+- Prettier
+
+## Start in application
+
+- Install [nvm](https://github.com/nvm-sh/nvm) for node version management and install _"lts/gallium"_ version.
+- After installing the "lts/gallium" node version, you must run the following command every time you start the application to use the suggested node version:
+
+```sh
+nvm use
+```
+
+- For package management, [pnpm](https://pnpm.io/installation) should be used as a matter of standard and there are no divergences.
+- After installing pnpm and nvm, just run the following command to install the dependencies and husky:
+
+```sh
+pnpm first-install
+```
+
+- And finally, to run the project locally, just run the following command:
+
+```sh
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## GitFlow
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The default branch is "master", where the "develop" branch will be responsible for all the features/bugs/fix that will go to the production release, so all development branches must start from develop with the following standards:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- feature/nameoftask: Something new
+- bug/nameofbug: Something that worked and stopped picking up.
+- All "commits" must follow the pattern like: feat, test, chore, ci, build, etc... so we can standardize the "commits" and find it easier in histories.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+After development, you should point the "Pull Request" to develop only after carrying out the tests with the team.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Workflow
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Ensure that during development everything is within the application standards to facilitate the Code Review and ensure that unit tests are at least 85%.
