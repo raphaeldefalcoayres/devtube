@@ -1,6 +1,6 @@
 'use client'
 
-import { VideoList } from '@/@types'
+import { Video, VideoList } from '@/@types'
 import { calculateRelevance } from '@/utils'
 import { createContext, useContext, useEffect, useState } from 'react'
 
@@ -25,8 +25,8 @@ const VideoProvider = ({ children }: { children: React.ReactNode }) => {
   const [videos, setVideos] = useState<VideoList>(contextJSON || {})
 
   const updateVotes = (videoId: string, positiveVotes: number, negativeVotes: number) => {
-    setVideos((prevVideos) => {
-      const updatedVideos = prevVideos.map((video) => {
+    setVideos((prevVideos: any) => {
+      const updatedVideos = prevVideos.data.map((video: Video) => {
         if (video.videoId === videoId) {
           return {
             ...video,
