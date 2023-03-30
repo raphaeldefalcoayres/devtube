@@ -7,22 +7,22 @@ import { useUser } from './user'
 
 interface VideoContextData {
   videos: Video[]
-  updateVotes: (videoId: string, positiveVotes: number, negativeVotes: number) => void
+  updateVotes: (
+    videoId: string,
+    positiveVotes: number,
+    negativeVotes: number
+  ) => void
   setVideos: (videos: Video[]) => void
   searchVideos: (search: string) => void
 }
 
-export const VideoContext = createContext<VideoContextData>({
-  videos: [],
-  updateVotes: () => {},
-  setVideos: () => {},
-  searchVideos: () => {},
-})
+export const VideoContext = createContext({} as VideoContextData)
 
 export const useVideo = () => useContext(VideoContext)
 
 const VideoProvider = ({ children }: { children: React.ReactNode }) => {
-  const context = typeof window !== 'undefined' ? localStorage.context : undefined
+  const context =
+    typeof window !== 'undefined' ? localStorage.context : undefined
   const contextJSON = context ? JSON.parse(context) : null
   const [videos, setVideos] = useState<Video[]>(contextJSON || [])
   const [bkpVideos, setBkpVideos] = useState<Video[]>(contextJSON || [])
@@ -41,7 +41,11 @@ const VideoProvider = ({ children }: { children: React.ReactNode }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const updateVotes = (videoId: string, positiveVotes: number, negativeVotes: number) => {
+  const updateVotes = (
+    videoId: string,
+    positiveVotes: number,
+    negativeVotes: number
+  ) => {
     setVideos((prevVideos) => {
       const updatedVideos = prevVideos.map((video) => {
         if (video.videoId === videoId) {
@@ -69,7 +73,9 @@ const VideoProvider = ({ children }: { children: React.ReactNode }) => {
       const isMatch =
         video.title.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
         video.description.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
-        video.tags.some((tag) => tag.toLowerCase().includes(search.toLowerCase()))
+        video.tags.some((tag) =>
+          tag.toLowerCase().includes(search.toLowerCase())
+        )
 
       // Verifica se o usuário já assistiu a esse vídeo
       const isWatched = user?.videos?.some((watchedVideo) => {
@@ -84,8 +90,12 @@ const VideoProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <VideoContext.Provider value={{ videos, setVideos, searchVideos, updateVotes }}>{children}</VideoContext.Provider>
+    <VideoContext.Provider
+      value={{ videos, setVideos, searchVideos, updateVotes }}
+    >
+      {children}
+    </VideoContext.Provider>
   )
 }
 
-export default VideoProvider
+export { VideoProvider }

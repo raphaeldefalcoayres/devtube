@@ -1,4 +1,6 @@
-const LevelDetail = ({ label, start, end, extra }: { label: string; start: number; end: number; extra?: string }) => {
+import { IPropsComponent } from './types'
+
+export const LevelDetail = ({ label, start, end, extra }: IPropsComponent) => {
   const percentage = (start * 100) / end
 
   return (
@@ -11,10 +13,12 @@ const LevelDetail = ({ label, start, end, extra }: { label: string; start: numbe
         </span>
       </div>
       <div className="flex w-full mt-2 bg-gray-800 rounded-xl">
-        <div className={`flex w-[${Math.round(percentage)}%] rounded-xl h-2 bg-blue-900`}></div>
+        <div
+          className={`flex w-[${Math.round(
+            percentage
+          )}%] rounded-xl h-2 bg-blue-900`}
+        ></div>
       </div>
     </div>
   )
 }
-
-export { LevelDetail }

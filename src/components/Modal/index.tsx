@@ -1,30 +1,24 @@
-import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
+import { Dialog, Transition } from '@headlessui/react'
 
-type MyModalProps = {
-  title: string
-  buttonText: string
-  children: any
-  buttonAction: any
-}
+import { IPropsComponent } from './types'
 
-export default function MyModal({ title, children, buttonText, buttonAction }: MyModalProps) {
-  let [isOpen, setIsOpen] = useState(true)
+export function Modal({
+  title,
+  children,
+  buttonText,
+  buttonAction,
+}: IPropsComponent) {
+  const [isOpen, setIsOpen] = useState(true)
 
-  function closeModal() {
-    setIsOpen(false)
-  }
-
-  function openModal() {
-    setIsOpen(true)
-  }
+  const handleStateModal = () => setIsOpen(!isOpen)
 
   return (
     <>
       <div className="fixed inset-0 flex items-center justify-center">
         <button
           type="button"
-          onClick={openModal}
+          onClick={handleStateModal}
           className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
         >
           Open dialog
@@ -32,9 +26,12 @@ export default function MyModal({ title, children, buttonText, buttonAction }: M
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+        <Dialog as="div" className="relative z-10" onClose={handleStateModal}>
           <div className="absolute top-0 right-0 pt-2 pr-2">
-            <button className="text-gray-500 hover:text-gray-700" onClick={closeModal}>
+            <button
+              className="text-gray-500 hover:text-gray-700"
+              onClick={handleStateModal}
+            >
               <span className="sr-only">Close</span>
               <svg
                 className="h-6 w-6"
@@ -44,7 +41,12 @@ export default function MyModal({ title, children, buttonText, buttonAction }: M
                 stroke="currentColor"
                 aria-hidden="true"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
@@ -74,7 +76,10 @@ export default function MyModal({ title, children, buttonText, buttonAction }: M
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-gray-900 p-6 text-left align-middle shadow-xl transition-all">
                   <div className="absolute top-0 right-0 pt-2 pr-2">
-                    <button className="text-gray-500 hover:text-gray-700" onClick={closeModal}>
+                    <button
+                      className="text-gray-500 hover:text-gray-700"
+                      onClick={handleStateModal}
+                    >
                       <span className="sr-only">Close</span>
                       <svg
                         className="h-6 w-6"
@@ -84,12 +89,20 @@ export default function MyModal({ title, children, buttonText, buttonAction }: M
                         stroke="currentColor"
                         aria-hidden="true"
                       >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M6 18L18 6M6 6l12 12"
+                        />
                       </svg>
                     </button>
                   </div>
 
-                  <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-100">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-lg font-medium leading-6 text-gray-100"
+                  >
                     {title}
                   </Dialog.Title>
                   <div className="mt-2">{children}</div>
@@ -108,7 +121,10 @@ export default function MyModal({ title, children, buttonText, buttonAction }: M
             </div>
           </div>
           <div className="absolute bottom-0 left-0 pb-2 pl-2">
-            <button className="text-gray-500 hover:text-gray-700" onClick={closeModal}>
+            <button
+              className="text-gray-500 hover:text-gray-700"
+              onClick={handleStateModal}
+            >
               <span className="sr-only">Close</span>
               <svg
                 className="h-6 w-6"
@@ -118,7 +134,12 @@ export default function MyModal({ title, children, buttonText, buttonAction }: M
                 stroke="currentColor"
                 aria-hidden="true"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>

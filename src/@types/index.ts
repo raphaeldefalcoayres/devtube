@@ -14,7 +14,7 @@ export interface Video {
   duration: number
   viewCount: number
   likeCount: number
-  dislikeCount: any
+  dislikeCount: number
   votes: {
     positiveVotes: number
     negativeVotes: number
@@ -28,11 +28,6 @@ export interface Video {
 export interface Topics {
   '2023': string[]
   curso: string[]
-}
-
-export interface CarouselProps {
-  data: Video[]
-  title: string
 }
 
 export type UserVideo = {
