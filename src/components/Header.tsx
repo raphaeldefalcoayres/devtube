@@ -60,7 +60,7 @@ const Header = () => {
         </Link>
         <div className="flex relative md:w-[30%] items-center gap-2">
           <div className="flex items-center gap-1 md:w-32 bg-blue-900 h-fit rounded-xl px-2 md:px-4 py-1 text-xs md:text-base">
-            <span dangerouslySetInnerHTML={{ __html: videos.total.toString() }}></span>
+            <span dangerouslySetInnerHTML={{ __html: videos.total ? videos.total.toString() : '0' }}></span>
             <small>videos</small>
           </div>
     
