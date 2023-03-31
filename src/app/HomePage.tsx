@@ -24,6 +24,8 @@ const HomePage = ({ videosList} : { videosList: VideoList}) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videosList])
 
+  console.log('aki', videosList?.data)
+
   // Agrupar vídeos por categoria
   const videosByCategory =  videosList?.data?.reduce((acc: { [x: string]: any[] }, video: Video) => {
     const category = video.category || 'Outros'
@@ -37,6 +39,8 @@ const HomePage = ({ videosList} : { videosList: VideoList}) => {
     }
     return acc
   }, {} as Record<string, Video[]>)
+
+  console.log('videosByCategory', videosByCategory)
  
   let totalDuration = 0
   const durationByCategory: Record<string, number> = {}
