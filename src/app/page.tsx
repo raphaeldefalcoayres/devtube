@@ -32,5 +32,7 @@ export default async function PageHome({ searchParams }: { searchParams: { searc
   // console.log('sortedVideos', sortedVideos)
   // console.log('teste', { ...videosList , data:sortedVideos!})
 
-  return <HomePage videosList={videosList} />
+  console.log('videoList', videosList)
+
+  return <h1>{JSON.stringify(videosList, null, 2)}</h1>
 }
