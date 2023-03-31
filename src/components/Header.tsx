@@ -18,6 +18,10 @@ const Header = () => {
   const pathname = usePathname()
   const { videos } = useVideo()
   const { user, setUser } = useUser()
+  const [totalVideos, setTotalVideos] = useState(0)
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => setTotalVideos(videos.total), [])
 
   useEffect(() => {
     router.push(pathname + '?search=' + search)
@@ -51,7 +55,7 @@ const Header = () => {
   return (
     <div className="fixed w-full flex flex-col z-40">
       <div className="w-full text-xs font-thin text-white bg-blue-900 py-1 text-center">
-        Este é um site <b>beta</b> com alguns dados do youtube de 2023 de categorias como HTML, CSS, Javascript,
+        Este é um site <b>beta</b> com alguns dados de vídeos youtube de 2020 a 2023 de categorias como HTML, CSS, Javascript,
         Typescript e outros.
       </div>
       <div className="w-full flex items-center justify-between py-3 px-6 bg-[#070913]">
@@ -60,7 +64,7 @@ const Header = () => {
         </Link>
         <div className="flex relative md:w-[30%] items-center gap-2">
           <div className="flex items-center gap-1 md:w-32 bg-blue-900 h-fit rounded-xl px-2 md:px-4 py-1 text-xs md:text-base">
-            <span dangerouslySetInnerHTML={{ __html: videos.total ? videos.total.toString() : '0' }}></span>
+            <div>{totalVideos}</div>
             <small>videos</small>
           </div>
     

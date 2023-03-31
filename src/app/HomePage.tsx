@@ -25,7 +25,7 @@ const HomePage = ({ videosList} : { videosList: VideoList}) => {
   }, [videosList])
 
   // Agrupar vídeos por categoria
-  const videosByCategory = videosList.data.reduce((acc: { [x: string]: any[] }, video: Video) => {
+  const videosByCategory =  videosList?.data?.reduce((acc: { [x: string]: any[] }, video: Video) => {
     const category = video.category || 'Outros'
     const durationMinutes = Math.floor(video.duration)
     if (durationMinutes > 1) {
