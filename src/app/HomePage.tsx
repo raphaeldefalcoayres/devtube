@@ -12,7 +12,8 @@ import { useEffect, useState } from 'react'
 import { TbHexagonFilled } from 'react-icons/tb'
 import MyModal from "@/components/Modal"
 
-const HomePage = ({ videosList} : { videosList: VideoList}) => {
+const HomePage = ({ videosList } : { videosList: VideoList}) => {
+  console.log('videosList', videosList)
   const [showModal, setShowModal] = useState(false)
   const [githubInput, setGithubInput] = useState('')
   const [videosByCategory, setVideosByCategory] = useState<{[x: string]: any[] | null}>()
