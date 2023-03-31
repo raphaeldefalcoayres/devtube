@@ -20,13 +20,11 @@ const Header = () => {
   const { user, setUser } = useUser()
   const [totalVideos, setTotalVideos] = useState(0)
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => setTotalVideos(videos.total), [])
-
   useEffect(() => {
     router.push(pathname + '?search=' + search)
+    setTotalVideos(videos.total)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search])
+  }, [search, videos])
 
   useEffect(() => {
     if (searchQuery) {

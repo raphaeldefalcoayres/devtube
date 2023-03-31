@@ -11,9 +11,12 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { TbHexagonFilled } from 'react-icons/tb'
 import MyModal from "@/components/Modal"
+import { useSearchParams } from 'next/navigation'
 
 const HomePage = ({ videosList } : { videosList: VideoList }) => {
-  console.log('videosList', videosList)
+  const searchParams = useSearchParams()
+  // const search = searchParams.get('search');
+
   const [showModal, setShowModal] = useState(false)
   const [githubInput, setGithubInput] = useState('')
   const [videosByCategory, setVideosByCategory] = useState<{[x: string]: any[] | null}>()
@@ -21,12 +24,19 @@ const HomePage = ({ videosList } : { videosList: VideoList }) => {
   const { user, setUser } = useUser()
 
   useEffect(() => {
-    setVideos(videosList)
-    console.log('videosList', videosList)
-    localStorage.setItem('context', JSON.stringify(videosList))
+    const filteredVideos = videosList?.data?.filter((video: Video) => {
+      const title = video.title.toLowerCase();
+      const search = searchParams.get('search')?.trim().toLowerCase();
+      return search === '' || title.includes(search!);
+    });
+
+    const newVideoslist = { total: filteredVideos.length, data: filteredVideos, totalPages: Math.ceil(filteredVideos.length/10), currentPage: 1, limit: 1001, skip: 0 }
+    console.log('newVideoslist', newVideoslist)
+    setVideos(newVideoslist)
+    localStorage.setItem('context', JSON.stringify(newVideoslist))
 
     // Agrupar vídeos por categoria
-    const videosByCategory = videosList?.data?.reduce((acc: { [x: string]: any[] }, video: Video) => {
+    const videosByCategory = newVideoslist?.data?.reduce((acc: { [x: string]: any[] }, video: Video) => {
       const category = video.category || 'Outros'
       const durationMinutes = Math.floor(video.duration)
       if (durationMinutes > 1) {
