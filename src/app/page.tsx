@@ -34,5 +34,5 @@ export default async function PageHome({ searchParams }: { searchParams: { searc
 
   console.log('videoList', videosList)
 
-  return <h1>{JSON.stringify(videosList, null, 2)}</h1>
+  return <h1>{JSON.stringify(`${process.env.NEXT_PUBLIC_API_URL}/videos?page=1&_limit=1001${searchParams.search ? `&title=${searchParams.search}` : ''}`)} {JSON.stringify(videosList, null, 2)}</h1>
 }
