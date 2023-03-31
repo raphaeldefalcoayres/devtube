@@ -15,32 +15,36 @@ import MyModal from "@/components/Modal"
 const HomePage = ({ videosList} : { videosList: VideoList}) => {
   const [showModal, setShowModal] = useState(false)
   const [githubInput, setGithubInput] = useState('')
+  const [videosByCategory, setVideosByCategory] = useState<{[x: string]: any[] | null}>()
   const { videos, setVideos } = useVideo()
   const { user, setUser } = useUser()
 
   useEffect(() => {
     setVideos(videosList)
+    console.log('videosList', videosList)
     localStorage.setItem('context', JSON.stringify(videosList))
+
+    // Agrupar vídeos por categoria
+    const videosByCategory = videosList?.data?.reduce((acc: { [x: string]: any[] }, video: Video) => {
+      const category = video.category || 'Outros'
+      const durationMinutes = Math.floor(video.duration)
+      if (durationMinutes > 1) {
+        // adiciona a verificação de duração
+        if (!acc[category]) {
+          acc[category] = []
+        }
+        acc[category].push(video)
+      }
+      return acc
+    }, {} as Record<string, Video[]>)
+
+    console.log('videosByCategory', videosByCategory)
+
+    setVideosByCategory(videosByCategory)
+
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videosList])
-
-  console.log('aki', videosList?.data)
-
-  // Agrupar vídeos por categoria
-  const videosByCategory =  videosList?.data?.reduce((acc: { [x: string]: any[] }, video: Video) => {
-    const category = video.category || 'Outros'
-    const durationMinutes = Math.floor(video.duration)
-    if (durationMinutes > 1) {
-      // adiciona a verificação de duração
-      if (!acc[category]) {
-        acc[category] = []
-      }
-      acc[category].push(video)
-    }
-    return acc
-  }, {} as Record<string, Video[]>)
-
-  console.log('videosByCategory', videosByCategory)
  
   let totalDuration = 0
   const durationByCategory: Record<string, number> = {}
@@ -108,8 +112,8 @@ const HomePage = ({ videosList} : { videosList: VideoList}) => {
     )}
     <div className="flex h-full">
       <div className="flex w-full md:w-[calc(100%-256px)] flex-col">
-        {Object.keys(videosByCategory).map((category) => (
-          <Carousel key={category} data={videosByCategory[category]} title={category} />
+        {videosByCategory && Object.keys(videosByCategory).map((category) => (
+          <Carousel key={category} data={videosByCategory[category]!} title={category} />
         ))}
       </div>
       <div className="hidden fixed right-0 w-64 h-[calc(100vh-100px)] md:flex flex-col items-center justify-start p-6 rounded-xl bg-[#070913]">
