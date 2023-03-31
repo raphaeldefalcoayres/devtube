@@ -13,8 +13,9 @@ export default async function PageHome({ searchParams }: { searchParams: { searc
       const bCategoryIndex = categoryOrder.indexOf(b.category)
       return aCategoryIndex - bCategoryIndex
     })
+  }
 
-   }
+  console.log('teste', { ...videosList , data:sortedVideos!})
 
   return <HomePage videosList={{ ...videosList , data:sortedVideos!}} />
 }
