@@ -4,7 +4,7 @@ import { HomePage } from './HomePage'
 const categoryOrder = ['html', 'css', 'javascript', 'typescript', 'react.js', 'next.js', 'react native', 'node.js']
 
 export default async function PageHome({ searchParams }: { searchParams: { search: string } }) {
-  const videosList: VideoList = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/videos?page=1&_limit=1001${searchParams.search ? `&title=${searchParams.search}` : ''}`, { next: { revalidate: 60 * 60 * 24 } }).then((data) => data.json())
+  const videosList: VideoList = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/videos?page=1&_limit=1001${searchParams.search ? `&title=${searchParams.search}` : ''}`, { next: { revalidate: 0 } }).then((data) => data.json())
   // let sortedVideos: Video[] | undefined
 
   // if(videosList.data){
